@@ -1,0 +1,28 @@
+
+Components
+    - Main concept in angular
+    - Basic building bloc 
+
+    Contains these 3 pieces:
+        - html template 
+        - logic (js)
+        - CSS/ Styling
+
+
+
+app.components.ts 
+    - main component file
+    - describes the 3 pieces
+    - selector, tag to indicate it
+
+
+
+index.html and style.css - main for everything
+
+
+app.modules.ts
+    - imports and third party dependencies found here
+
+
+
+How to create Services 
