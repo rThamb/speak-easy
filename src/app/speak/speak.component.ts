@@ -42,7 +42,7 @@ export class SpeakComponent implements OnInit, OnDestroy {
             //listener
             (value) => {
                 this.speechData = value;
-                alert(value);
+                this.translateSpeech();
                 console.log(value);
             },
             //errror
@@ -56,12 +56,12 @@ export class SpeakComponent implements OnInit, OnDestroy {
             //completion
             () => {
                 console.log("--complete--");
-                this.activateSpeechSearchMovie();
             });
     }
 
-    translateSpeech(speechData){
+    translateSpeech(){
         //use translate service
+        alert("Translating: " + this.speechData); 
     }
 
 }

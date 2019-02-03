@@ -9,4 +9,5 @@ export class AppComponent {
 
   //Logic for the component is found here
   title = 'speak-easy';
+
 }

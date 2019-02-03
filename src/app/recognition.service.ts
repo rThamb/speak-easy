@@ -49,10 +49,13 @@ export class RecognitionService {
                             console.log("You said: -> " + term);
                         }
                     }
+                    
                 }
+                
                 this.zone.run(() => {
-                    observer.next(term);
-                });
+                  this.DestroySpeechObject();
+                   observer.next(term);
+                });       
             };
 
             this.speechRecognition.onerror = error => {
@@ -67,6 +70,11 @@ export class RecognitionService {
             console.log("Say something - We are listening !!!");
         });
     }
+
+    speak(){
+
+    }
+
 
   DestroySpeechObject() {
       if (this.speechRecognition)
