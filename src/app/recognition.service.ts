@@ -1,6 +1,8 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Observable } from 'rxjs';
+
 import * as _ from "lodash";
+import vocabulator from 'vocabulator';
 
 interface IWindow extends Window {
     webkitSpeechRecognition: any;
@@ -18,10 +20,6 @@ export class RecognitionService {
   speechRecognition: any;
 
   constructor(private zone: NgZone) { }
-
-  getData(){
-    return "Hello World"; 
-  }
 
   //pass the language the speaker is talking in. 
   listen(): Observable<string> {
@@ -71,8 +69,21 @@ export class RecognitionService {
         });
     }
 
-    speak(){
+    speak(speeechContent, language){
 
+        //pass in language
+
+        speeechContent = 'Hello, world!';
+        language =  'en-GB';
+
+    
+        const synthesizer = vocabulator({
+            language: language,
+            voiceName: 'Google UK English Male',
+            pitch: 1
+        });
+ 
+        synthesizer.say({ text: speeechContent, /* language, voiceName, pitch, ... */  })
     }
 
 
