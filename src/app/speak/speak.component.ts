@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {RecognitionService} from '../recognition.service';
+import {TranslateService} from '../translate.service'; 
 
 @Component({
   selector: 'app-speak',
@@ -9,6 +10,7 @@ import {RecognitionService} from '../recognition.service';
 export class SpeakComponent implements OnInit, OnDestroy {
 
   service: RecognitionService;
+  translateService: TranslateService; 
   
   speechData: string;
 
@@ -17,8 +19,9 @@ export class SpeakComponent implements OnInit, OnDestroy {
 
   //Angular will inject the custom service, make sure to register app in app.module.ts (providers)
   //ng generate service {serviceName} - to generate a new service
-  constructor(private sttService: RecognitionService) {
+  constructor(private sttService: RecognitionService, private tService: TranslateService) {
     this.service = sttService;
+    this.translateService = tService; 
   }
 
   ngOnInit() {
@@ -62,6 +65,8 @@ export class SpeakComponent implements OnInit, OnDestroy {
     translateSpeech(){
         //use translate service
         alert("Translating: " + this.speechData); 
+        var content = this.translateService.translate(this.speechData, "fr"); 
+        alert(content);
     }
 
 }
