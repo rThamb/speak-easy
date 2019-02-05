@@ -35,9 +35,7 @@ export class SpeakComponent implements OnInit, OnDestroy {
   }
 
   listen(){
-    //this.activateSpeechSearchMovie();
-    this.speechData = "HI there"; 
-    this.translateSpeech(); 
+    this.activateSpeechSearchMovie();
   }
 
 
@@ -66,17 +64,13 @@ export class SpeakComponent implements OnInit, OnDestroy {
 
     translateSpeech(){
         //use translate service
-        this.translateService.translate(this.speechData, "fr", this.speakTranslateContent); 
+        this.translateService.translate(this.speechData, "fr", this.speakTranslateContent, this.service); 
     }
 
-    speakTranslateContent(content){
-
-        debugger; 
-        alert("Translated Content: " + content.text[0]);
-        
-        //get the lang code 
-
-        this.service.speak(content,'');
+    speakTranslateContent(content, service){       
+        var langCode = "fr-FR";
+        var voiceUrl = "Google français";
+        service.speak(content.text[0], langCode, voiceUrl);
     }
 
 }

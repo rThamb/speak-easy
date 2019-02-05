@@ -69,17 +69,17 @@ export class RecognitionService {
         });
     }
 
-    speak(speeechContent, language){
+    speak(speeechContent, language, voiceName){
 
         //pass in language
 
-        speeechContent = 'Hello, world!';
-        language =  'en-GB';
+        //speeechContent = 'Hello, world!';
+        //language =  'en-GB';
+        //voiceName = "Google UK English Male";      
 
-    
         const synthesizer = vocabulator({
             language: language,
-            voiceName: 'Google UK English Male',
+            voiceName: voiceName,
             pitch: 1
         });
  
