@@ -15,7 +15,13 @@ export class SpeakComponent implements OnInit, OnDestroy {
   speechData: string;
 
   langSpoken: string; 
-  langTranslated: string; 
+
+  //for voice reg.
+  langListener: string; 
+  voiceURL: string; 
+
+  //for api
+  apiLangCode: string; 
 
   //Angular will inject the custom service, make sure to register app in app.module.ts (providers)
   //ng generate service {serviceName} - to generate a new service
@@ -27,20 +33,40 @@ export class SpeakComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.speechData = "";
     this.langSpoken = ""; 
-    this.langTranslated = ""; 
   }
 
   ngOnDestroy() {
     this.service.DestroySpeechObject();
   }
 
-  listen(){
-    this.activateSpeechSearchMovie();
+  translateEnglish(){
+      this.langSpoken = "en-us";
+      this.apiLangCode = 'fr';
+      this.langListener = "fr-FR";
+      this.voiceURL = "Google français";
+
+      this.listen(this.langSpoken);
+  }
+
+  translateSpeaker(){
+
+      this.langSpoken = "fr-FR";
+      this.apiLangCode = 'en';
+      this.langListener = "en-US";
+      this.voiceURL = "Google US English";
+
+      this.listen(this.langSpoken); 
   }
 
 
-  activateSpeechSearchMovie(): void {
-        this.service.listen()
+
+  listen(lang){
+    this.activateSpeechSearchMovie(lang);
+  }
+
+
+  activateSpeechSearchMovie(lang): void {
+        this.service.listen(lang)
             .subscribe(
             //listener
             (value) => {
@@ -53,7 +79,7 @@ export class SpeakComponent implements OnInit, OnDestroy {
                 console.log(err);
                 if (err.error == "no-speech") {
                     console.log("--restatring service--");
-                    this.activateSpeechSearchMovie();
+                    this.activateSpeechSearchMovie(lang);
                 }
             },
             //completion
@@ -64,12 +90,13 @@ export class SpeakComponent implements OnInit, OnDestroy {
 
     translateSpeech(){
         //use translate service
-        this.translateService.translate(this.speechData, "fr", this.speakTranslateContent, this.service); 
+        this.translateService.translate(this.speechData, this.apiLangCode, this.speakTranslateContent, this.service, this.langListener, this.voiceURL); 
     }
 
-    speakTranslateContent(content, service){       
-        var langCode = "fr-FR";
-        var voiceUrl = "Google français";
+    speakTranslateContent(content, service, langListener, voiceURL){       
+        
+        var langCode = langListener
+        var voiceUrl = voiceURL;
         service.speak(content.text[0], langCode, voiceUrl);
     }
 

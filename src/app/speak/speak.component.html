@@ -1,5 +1,10 @@
 <!-- attach listener to the component, check docs for all events  --> 
-<div class="speak" (click)="listen()">
+<div class="speak" (click)="translateEnglish()">
     <div class="icon"></div>
-    <div class="text">{{ message }} Speak</div>
+    <div class="text">Speak</div>
+</div>
+
+<div class="speak" (click)="translateSpeaker()">
+    <div class="icon"></div>
+    <div class="text">Listen</div>
 </div>

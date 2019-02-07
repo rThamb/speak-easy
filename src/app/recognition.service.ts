@@ -19,10 +19,12 @@ export class RecognitionService {
 
   speechRecognition: any;
 
+  langSpeaking: string; //
+
   constructor(private zone: NgZone) { }
 
   //pass the language the speaker is talking in. 
-  listen(): Observable<string> {
+  listen(langSpeaking): Observable<string> {
 
         return Observable.create(observer => {
             const { webkitSpeechRecognition }: IWindow = <IWindow>window;
@@ -30,7 +32,7 @@ export class RecognitionService {
             //this.speechRecognition = SpeechRecognition;
             this.speechRecognition.continuous = true;
             //this.speechRecognition.interimResults = true;
-            this.speechRecognition.lang = 'en-us';
+            this.speechRecognition.lang = langSpeaking;
             this.speechRecognition.maxAlternatives = 1;
 
             this.speechRecognition.onresult = speech => {
