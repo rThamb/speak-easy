@@ -20,3 +20,42 @@
   display: inline-block;
   line-height: 48px;
 }
+
+.languagepicker {
+	background-color: #FFF;
+	display: inline-block;
+	padding: 0;
+	height: 40px;
+	overflow: hidden;
+	transition: all .3s ease;
+	margin: 0 50px 10px 0;
+	vertical-align: top;
+	float: left;
+}
+
+
+.languagepicker option{
+	color: #000;
+	text-decoration: none;
+}
+
+.languagepicker option {
+	display: block;
+	padding: 0px 20px;
+	line-height: 40px;
+	border-top: 1px solid #EEE;
+}
+
+.languagepicker option:hover{
+	background-color: #a3d063;
+}
+
+.languagepicker a:first-child option {
+	border: none;
+	background: #a3d063 !important;
+}
+
+
+.roundborders {
+	border-radius: 5px;
+}

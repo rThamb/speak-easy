@@ -7,6 +7,8 @@ import { SpeakComponent } from './speak/speak.component';
 
 import {RecognitionService} from './recognition.service';
 import {TranslateService} from './translate.service';
+import {LangConfigService} from './lang-config.service';
+
 
 
 @NgModule({
@@ -18,7 +20,7 @@ import {TranslateService} from './translate.service';
     BrowserModule,
     HttpClientModule
   ],
-  providers: [RecognitionService, TranslateService], //Write the name of service classes to enable injection
+  providers: [RecognitionService, TranslateService, LangConfigService], //Write the name of service classes to enable injection
   bootstrap: [AppComponent]
 })
 export class AppModule { }

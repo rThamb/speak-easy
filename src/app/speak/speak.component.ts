@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {RecognitionService} from '../recognition.service';
 import {TranslateService} from '../translate.service'; 
+import {LangConfigService} from '../lang-config.service';
 
 @Component({
   selector: 'app-speak',
@@ -11,6 +12,7 @@ export class SpeakComponent implements OnInit, OnDestroy {
 
   service: RecognitionService;
   translateService: TranslateService; 
+  configService: LangConfigService;
   
   speechData: string;
 
@@ -25,9 +27,11 @@ export class SpeakComponent implements OnInit, OnDestroy {
 
   //Angular will inject the custom service, make sure to register app in app.module.ts (providers)
   //ng generate service {serviceName} - to generate a new service
-  constructor(private sttService: RecognitionService, private tService: TranslateService) {
+  constructor(private sttService: RecognitionService, private tService: TranslateService,
+              private langConService: LangConfigService) {
     this.service = sttService;
     this.translateService = tService; 
+    this.configService = langConService;
   }
 
   ngOnInit() {
@@ -40,24 +44,33 @@ export class SpeakComponent implements OnInit, OnDestroy {
   }
 
   translateEnglish(){
-      this.langSpoken = "en-us";
-      this.apiLangCode = 'fr';
-      this.langListener = "fr-FR";
-      this.voiceURL = "Google français";
+
+    var config = this.configService.getSpeakerConfiguration(this.getLangCode());
+
+      this.langSpoken = config.langSpoken;
+      this.apiLangCode = config.apiLangCode;
+      this.langListener = config.langListener;
+      this.voiceURL = config.voiceURL;
 
       this.listen(this.langSpoken);
   }
 
   translateSpeaker(){
 
-      this.langSpoken = "fr-FR";
-      this.apiLangCode = 'en';
-      this.langListener = "en-US";
-      this.voiceURL = "Google US English";
+      var config = this.configService.getListenConfiguration(this.getLangCode());
+      this.langSpoken = config.langSpoken;
+      this.apiLangCode = config.apiLangCode;
+      this.langListener = config.langListener;
+      this.voiceURL = config.voiceURL;
 
       this.listen(this.langSpoken); 
   }
 
+
+  getLangCode(){
+        let element: HTMLInputElement = (<HTMLInputElement>document.getElementById("lang"));
+        return element.value;
+  }
 
 
   listen(lang){
