@@ -10,7 +10,7 @@ body {
 .chat_window {
   position: absolute;
   width: calc(100% - 20px);
-  height: 90%;
+  height: 100%;
   max-width: 1000px;
   border-radius: 10px;
   background-color: #fff;
