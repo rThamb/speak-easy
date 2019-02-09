@@ -8,13 +8,15 @@ import { SpeakComponent } from './speak/speak.component';
 import {RecognitionService} from './recognition.service';
 import {TranslateService} from './translate.service';
 import {LangConfigService} from './lang-config.service';
+import { ChatboxComponent } from './chatbox/chatbox.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SpeakComponent
+    SpeakComponent,
+    ChatboxComponent
   ],
   imports: [
     BrowserModule,

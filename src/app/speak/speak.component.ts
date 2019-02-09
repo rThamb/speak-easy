@@ -108,6 +108,8 @@ export class SpeakComponent implements OnInit, OnDestroy {
 
     speakTranslateContent(content, service, langListener, voiceURL){       
         
+        debugger; 
+
         var langCode = langListener
         var voiceUrl = voiceURL;
         service.speak(content.text[0], langCode, voiceUrl);
