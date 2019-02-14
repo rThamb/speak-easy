@@ -13,6 +13,21 @@
   margin: 10px;
 }
 
+.stop[_ngcontent-c2] {
+  width: 140px;
+  height: 50px;
+  display: inline-block;
+  border-radius: 50px;
+  background-color: #F04662;
+  border: 2px solid #F04662;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s linear;
+  text-align: center;
+  float: center;
+}
+
+
 .text {
   color: #fff;
   font-size: 18px;

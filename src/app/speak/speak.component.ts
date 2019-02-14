@@ -31,6 +31,11 @@ export class SpeakComponent implements OnInit, OnDestroy {
   //for api
   apiLangCode: string; 
 
+  //button state
+  active: boolean; 
+  button: Element; 
+
+
   //Angular will inject the custom service, make sure to register app in app.module.ts (providers)
   //ng generate service {serviceName} - to generate a new service
   constructor(private sttService: RecognitionService, private tService: TranslateService,
@@ -56,6 +61,10 @@ export class SpeakComponent implements OnInit, OnDestroy {
 
   translateEnglish(){
 
+    this.active = true;
+    this.button = document.getElementById("speakBtn");
+    this.toggleButton();
+
     var config = this.configService.getSpeakerConfiguration(this.getLangCode());
 
       this.langSpoken = config.langSpoken;
@@ -67,6 +76,10 @@ export class SpeakComponent implements OnInit, OnDestroy {
   }
 
   translateSpeaker(){
+
+      this.active = true;
+      this.button = document.getElementById("listenBtn");
+      this.toggleButton();
 
       var config = this.configService.getListenConfiguration(this.getLangCode());
       this.langSpoken = config.langSpoken;
@@ -95,6 +108,8 @@ export class SpeakComponent implements OnInit, OnDestroy {
             //listener
             (value) => {
                 this.speechData = value;
+                this.active = false; 
+                this.toggleButton();
                 this.translateSpeech();
                 console.log(value);
             },
@@ -130,5 +145,14 @@ export class SpeakComponent implements OnInit, OnDestroy {
 
         notifyParent.emit(message + "|" + langCode); 
         service.speak(content.text[0], langCode, voiceUrl);        
+    }
+
+    toggleButton(){
+
+        debugger;
+        if(this.active)
+            this.button.className = "stop";
+        else
+            this.button.className = "speak";
     }
 }
