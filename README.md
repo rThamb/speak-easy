@@ -1,5 +1,11 @@
 # SpeakEasy
 
+A simple speech interpreter tool to help Anglophones in Quebec with french only service. 
+
+
+### Remarks:
+
+Please ensure you have the latest version of Google Chrome (Version 71.0 +) installed on your local machine.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.0.
 
 ## Development server
