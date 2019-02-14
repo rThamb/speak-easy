@@ -9,7 +9,8 @@
     <div class="text">Listen</div>
 </div>
 
-<select id="lang" class="languagepicker roundborders">
+
+<select (input)="onLangChange()" id="lang" class="languagepicker roundborders"  >
     <option value="fr"><img src="http://i65.tinypic.com/300b30k.png"/>Français</option>
     <option value="es"><img src="http://i68.tinypic.com/avo5ky.png"/>Español</option>
     <!--<option value="zh"><img src="http://i68.tinypic.com/avo5ky.png"/>中文</option>-->

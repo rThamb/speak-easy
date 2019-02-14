@@ -29,4 +29,12 @@ export class ChatboxComponent implements OnInit {
     let html = this.getDialogHTML(content[0], content[1] != "en-US");
     ele.insertAdjacentHTML('beforeend', html);
   }
+
+  clearChatBox(event){
+      
+      let ele = this.getChatbox();
+      while (ele.firstChild) {
+        ele.removeChild(ele.firstChild);
+      }
+  }
 }

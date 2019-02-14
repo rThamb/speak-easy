@@ -14,6 +14,7 @@ export class SpeakComponent implements OnInit, OnDestroy {
   //@Input() chatbox: ChatboxComponent;
   
   @Output() notifyParent: EventEmitter<any> = new EventEmitter();
+  @Output() clearBox: EventEmitter<any> = new EventEmitter();
 
   service: RecognitionService;
   translateService: TranslateService; 
@@ -46,6 +47,11 @@ export class SpeakComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.service.DestroySpeechObject();
+  }
+
+
+  onLangChange(){
+      this.clearBox.emit("");
   }
 
   translateEnglish(){
