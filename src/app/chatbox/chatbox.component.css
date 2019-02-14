@@ -39,7 +39,7 @@ body {
   list-style: none;
   padding: 20px 10px 0 10px;
   margin: 0;
-  height: 347px;
+  height: 70%;
   overflow: scroll;
 }
 .messages .message {

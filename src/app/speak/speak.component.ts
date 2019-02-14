@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import {RecognitionService} from '../recognition.service';
 import {TranslateService} from '../translate.service'; 
 import {LangConfigService} from '../lang-config.service';
+import {ChatboxComponent} from '../chatbox/chatbox.component'; 
 
 @Component({
   selector: 'app-speak',
@@ -9,6 +10,10 @@ import {LangConfigService} from '../lang-config.service';
   styleUrls: ['./speak.component.css']
 })
 export class SpeakComponent implements OnInit, OnDestroy {
+
+  //@Input() chatbox: ChatboxComponent;
+  
+  @Output() notifyParent: EventEmitter<any> = new EventEmitter();
 
   service: RecognitionService;
   translateService: TranslateService; 
@@ -103,16 +108,21 @@ export class SpeakComponent implements OnInit, OnDestroy {
 
     translateSpeech(){
         //use translate service
-        this.translateService.translate(this.speechData, this.apiLangCode, this.speakTranslateContent, this.service, this.langListener, this.voiceURL); 
+        this.translateService.translate(this.speechData, this.apiLangCode, this.speakTranslateContent, this.service, this.langListener, this.voiceURL, this.notifyParent); 
     }
 
-    speakTranslateContent(content, service, langListener, voiceURL){       
+    speakTranslateContent(original, content, service, langListener, voiceURL, notifyParent){       
         
-        debugger; 
-
         var langCode = langListener
         var voiceUrl = voiceURL;
-        service.speak(content.text[0], langCode, voiceUrl);
-    }
+        var message = "";
+        
+        if(langCode != 'en-US')
+            message = original + " - " + content.text[0];
+        else
+            message = content.text[0] + " - " + original;
 
+        notifyParent.emit(message + "|" + langCode); 
+        service.speak(content.text[0], langCode, voiceUrl);        
+    }
 }
